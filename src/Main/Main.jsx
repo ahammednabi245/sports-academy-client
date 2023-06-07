@@ -8,7 +8,7 @@ const Main = () => {
     return (
         <div>
        
-          <div className='px-10'>
+          <div className='px-10 bg-white'>
             <NavBar></NavBar>
             <Outlet></Outlet>
             <Footer></Footer>

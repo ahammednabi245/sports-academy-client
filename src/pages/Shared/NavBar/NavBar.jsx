@@ -35,7 +35,7 @@ const NavBar = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-base-100 shadow-lg ">
                 <div className="navbar-start">
 
                     <img className="btn btn-ghost normal-case text-xl" src={logo} alt="" />
