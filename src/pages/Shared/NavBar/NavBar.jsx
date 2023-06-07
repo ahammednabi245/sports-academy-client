@@ -7,11 +7,11 @@ const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then()
-    //         .catch(error => console.log(error));
-    // }
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch(error => console.log(error));
+    }
 
     const navItems = <>
 
@@ -58,8 +58,7 @@ const NavBar = () => {
                                 title={user.displayName}
                             />
                         ) : (
-                            // <UserCircleIcon className='h-16 w-16 text-black' title={user.displayName} />
-                            <img src="https://icons8.com/icon/oO0pZgktLNpK/user" alt="" />
+                            ''
                             
                         )
                     ) : null}

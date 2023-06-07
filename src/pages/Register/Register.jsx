@@ -1,73 +1,183 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaTwitter } from 'react-icons/fa';
+import { FaRegEye, FaRegEyeSlash, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
+import Swal from "sweetalert2";
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const { signInWithGoogle, signInWithTwitter, createUser } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [show, setShow] = useState(false);
+    const [confirmShow, setConfirmShow] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = (data) => {
+        const { Name, email, password, confirmPassword, photo } = data;
+        setError(' ');
+
+        if (password.length < 6) {
+            setError('Your password must be at least 6 characters long.');
+            return;
+        } else if (password !== confirmPassword) {
+            setError('Your password and confirmation password do not match.');
+            return;
+        }
+
+        createUser(email, password)
+            .then((result) => {
+                const createdUser = result.user;
+
+                // Set displayName and photoURL
+                updateProfile(createdUser, {
+                    displayName: Name,
+                    photoURL: photo
+                })
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your account has been created successfully',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                        });
+                        navigate(from, { replace: true });
+                        console.log(createdUser);
+                    })
+                    .catch((error) => {
+                        console.log('Error updating user profile:', error);
+                        
+                    });
+            })
+            .catch((error) => {
+                console.log('Error creating user:', error);
+                if (error.message) {
+                    setError('Your Email is invalid');}
+               
+            });
+    };
+
+    // Twitter Sign in
+
+    const handleTwitterSignIn = () => {
+        signInWithTwitter()
+            .then(() => {
+                console.log('User signed in with Google');
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                console.log('Error signing in with Google:', error);
+            });
+    };
+
+    // Google Sign in
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(() => {
+                console.log('User signed in with Google');
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                console.log('Error signing in with Google:', error);
+            });
+    };
 
     return (
         <div>
             <div className='flex justify-center mt-28 mb-10'>
-
-                <form className='bg-zinc-200 shadow-xl rounded-lg' onSubmit={handleSubmit(onSubmit)}>
-
-                    <div className='px-10 py-7'>
+                <form className='bg-zinc-200 shadow-xl flex flex-col justify-center rounded-lg w-[500px]' onSubmit={handleSubmit(onSubmit)}>
+                    <div className='px-10 py-7 '>
                         <div>
                             <h1 className='text-center text-4xl font-semibold'>Register</h1>
-                            <p className='text-center mt-3 mb-5' >Please Register Your Account</p>
+                            <p className='text-center mt-3 mb-5'>Please Register Your Account</p>
                         </div>
                         <div className='my-4'>
-                            <label className=' text-lg mb-12'>Name</label> <br />
-                            <input className='border p-5 h-[50px] w-96 rounded-md  ' {...register("Name", { required: true })} placeholder="Name" />
+                            <label className='text-lg mb-12'>Name</label> <br />
+                            <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.Name ? 'border-red-500' : ''}`} {...register("Name", { required: true })} placeholder="Name" />
+                            {errors.Name && <p className="text-red-600">Name is required</p>}
+                        </div>
+                        <div className='my-4'>
+                            <label className='text-lg mb-12'>Email</label> <br />
+                            <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.email ? 'border-red-500' : ''}`} {...register("email", { required: true })} placeholder="Email" />
+                            {errors.email && <p className="text-red-600">Email is required</p>}
+                        </div>
+                        <div className='my-4'>
+                            <label className='text-lg mb-12'>Password</label> <br />
+                            <div style={{ position: 'relative' }}>
+                                <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.password ? 'border-red-500' : ''}`} type={show ? 'text' : 'password'} {...register("password", {
+                                    required: true, 
+                                    pattern: /(?=.*[A-Z])(?=.*[!@#$%^&*])/
 
-                        </div>
-                        <div className='my-4'>
-                            <label className=' text-lg mb-12'>Email</label> <br />
-                            <input className='border p-5 h-[50px] w-96 rounded-md  ' {...register("email", { required: true })} placeholder="Email" />
-
-                        </div>
-                        <div className='my-4'>
-                            <label className=' text-lg mb-12'>Password</label> <br />
-                            <input className='border p-5 h-[50px] w-96 rounded-md ' type="password" {...register("password", { required: true })} placeholder="Password" />
-                        </div>
-                        <div className='my-4'>
-                            <label className=' text-lg mb-12'>Confirm Password</label> <br />
-                            <input className='border p-5 h-[50px] w-96 rounded-md ' type="confirm password" {...register("confirm password", { required: true })} placeholder="Confirm Password" />
-                        </div>
-                        <div className='my-4'>
-                            <label className=' text-lg mb-12'>Photo URL</label> <br />
-                            <input className='border p-5 h-[50px] w-96 rounded-md ' type="confirm password" {...register("confirm password", { required: true })} placeholder="Confirm Password" />
-                        </div>
-
-                        <div className='my-4'>
-                            {/* ToDo: Error or Success Alert */}
-                            <h1>Error</h1>
+                                })} placeholder="Password" />
+                                <p
+                                    style={{
+                                        position: 'absolute',
+                                        right: '40px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={() => setShow(!show)}
+                                >
+                                    <small className='text-[18px]'>{show ? <FaRegEyeSlash /> : <FaRegEye />}</small>
+                                </p>
+                            </div>
+                            {errors.password?.type === 'pattern' && <p className="text-red-600">Don't Have a Capital Letter Or Don't Have a Special Character</p>}
+                            {errors.password && <p className="text-red-600">Password is required</p>}
+                           
                         </div>
 
                         <div className='my-4'>
-                            <input className=' btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] w-96' type="submit" />
+                            <label className='text-lg mb-12'>Confirm Password</label> <br />
+                            <div style={{ position: 'relative' }}>
+                                <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.confirmPassword ? 'border-red-500' : ''}`} type={confirmShow ? 'text' : 'password'} {...register("confirmPassword", { required: true })} placeholder="Confirm Password" />
+                                <p
+                                    style={{
+                                        position: 'absolute',
+                                        right: '40px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={() => setConfirmShow(!confirmShow)}
+                                >
+                                    <small className='text-[18px]'>{confirmShow ? <FaRegEyeSlash /> : <FaRegEye />}</small>
+                                </p>
+                            </div>
+                            {errors.confirmPassword && <p className="text-red-600">Confirm Password is required</p>}
                         </div>
-
+                        <div className='my-4'>
+                            <label className='text-lg mb-12'>Photo URL</label> <br />
+                            <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.photo ? 'border-red-500' : ''}`} type="text" {...register("photo", { required: true })} placeholder="Photo URL" />
+                            {errors.photo && <p className="text-red-600">Photo URL is required</p>}
+                        </div>
+                        <div className='my-4'>
+                            {error && <p className="text-red-600">{error}</p>}
+                        </div>
+                        <div className='my-4'>
+                            <input className='btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] w-[400px]' type="submit" />
+                        </div>
                         <div className='mt-10 mb-4'>
                             <p className='text-center mt-3 mb-5'>Login with social accounts</p>
                             <div className='flex flex-col gap-6'>
                                 <div
-                                    // onClick={handleGoogleSignIn}
-                                    className=' btn btn-outline w-96 hover:bg-[#0b1b3c] rounded-md cursor-pointer'>
-                                    <FcGoogle size={32} />
-
-                                    <p>Google</p>
+                                    onClick={handleTwitterSignIn}
+                                    className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'
+                                >
+                                    <FaTwitter className="text-[#1da1f2] text-3xl"></FaTwitter>
+                                    <p>Twitter</p>
                                 </div>
                                 <div
-                                    // onClick={handleGoogleSignIn}
-                                    className=' btn btn-outline w-96 hover:bg-[#0b1b3c] rounded-md cursor-pointer'>
-
-                                    <FaTwitter className="text-[#1da1f2] text-3xl"></FaTwitter>
-
-                                    <p>Twitter</p>
+                                    onClick={handleGoogleSignIn}
+                                    className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'
+                                >
+                                    <FcGoogle size={32} />
+                                    <p>Google</p>
                                 </div>
                             </div>
                         </div>
