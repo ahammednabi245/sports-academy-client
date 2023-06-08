@@ -11,8 +11,11 @@ const useInstructors = () => {
     },
   });
 
+  const sortedPopularInstructors = popularInstructors.sort(
+    (a, b) => b.numberOfStudents - a.numberOfStudents
+  );
 
-  return [popularInstructors, loading, refetch];
+  return [sortedPopularInstructors, loading, refetch];
 };
 
 export default useInstructors;
