@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+
+
 const useClasses = () => {
   const { data: popularClass = [], isLoading: loading, refetch } = useQuery({
     queryKey: ["popularClass"],
