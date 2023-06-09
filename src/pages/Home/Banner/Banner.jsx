@@ -67,7 +67,7 @@ const Banner = () => {
                         <div className="slide-container w-[100%] h-[550px]">
                             <img src={cricket} alt="" />
                             <div className="slide-text">
-                                <Zoom className='ml-[200px]'>
+                                <Zoom className='lg:ml-[200px]'>
                                     <div className='w-[400] h-[400] p-10  bg-slate-900 opacity-75 rounded-tl-[50px] rounded-br-[50px]'>
                                         <Rotate  className='text-[40px]'>Cricket</Rotate>
 
@@ -86,7 +86,7 @@ const Banner = () => {
                         <div className="slide-container  w-[100%] h-[550px]">
                             <img src={badminton} alt="" />
                             <div className="slide-text">
-                                <JackInTheBox className='mr-[220px] -mt-10'>
+                                <JackInTheBox className='lg:mr-[220px] -mt-10'>
                                     <div className='w-[400] h-[400] p-10 bg-slate-900 opacity-75 rounded-tr-[50px] rounded-bl-[50px]'>
                                         <Rotate  className='text-[40px]'>Badminton</Rotate>
 
