@@ -1,10 +1,41 @@
 import React from 'react';
 import useSelectedClasses from '../../hooks/useSelectedClasses';
+import Swal from 'sweetalert2';
 
 const MySelectedClasses = () => {
     const [selected, refetch, loading] = useSelectedClasses();
 
-
+    const handleDelete = course => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You wanted to delete this course!",
+            icon: "warning",
+            showCancelButton: true,
+            iconColor: "#d33",
+            confirmButtonColor: "#0f2248",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/selectedCourse/${course._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: 'Deleted',
+                                text: 'Your Course has been deleted',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+            }
+        })
+    }
 
     return (
         <div>
@@ -41,7 +72,7 @@ const MySelectedClasses = () => {
                                         <td className="text-[16px]">{course.instructorName}</td>
                                         <td className="text-[16px]">{course.price}</td>
                                         <td>
-                                            <button className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]">Delete
+                                            <button onClick={() => handleDelete(course)} className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]">Delete
                                             </button>
                                         </td>
                                         <td>
