@@ -12,7 +12,7 @@ const Instructors = () => {
                 </div>
             ) : (
                 instructors.map((instructor) => (
-                    <div key={instructor.id}>
+                    <div key={instructor._id}>
                         <div className="card card-compact w-96 bg-base-100 shadow-xl">
                             <figure>
                                 <img className='w-[300px] h-[200px] rounded-md' src={instructor.instructorsImage} alt={instructor.instructorName} />
