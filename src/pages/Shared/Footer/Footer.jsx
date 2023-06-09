@@ -40,7 +40,7 @@ const Footer = () => {
                 </div>
                 <div>
                     <span className="footer-title">All Contacts </span>
-                    <a className="link link-hover flex justify-center items-center gap-2 "> <span className='text-lg'><IoLocationOutline></IoLocationOutline></span> 111 8th Ave, Dhaka Bangladesh.</a>
+                    <a className="link link-hover flex justify-center items-center gap-2 "> <span className='text-lg'><IoLocationOutline></IoLocationOutline></span> 111 8th Ave, New York U.S.A</a>
                     <a className="link link-hover flex justify-center items-center gap-2"> <span className='text-lg'><BsTelephone></BsTelephone></span> Office +1-202-555-0153</a>
                     <a className="link link-hover flex justify-center items-center gap-2"> <span className='text-lg'><TfiEmail></TfiEmail></span> info@sportsacademys.com</a>
                     <a className="link link-hover flex justify-center items-center gap-2"><span className='text-lg'><BiTime></BiTime></span> 08 am - 06 pm Sunday closed</a>

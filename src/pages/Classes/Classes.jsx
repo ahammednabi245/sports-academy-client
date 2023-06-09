@@ -69,7 +69,7 @@ const Classes = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-16">
                 {loading ? (
                     <div className="flex justify-center items-center">
-                        <p className="loading loading-spinner text-[#0f2248] loading-lg  my-[200px]"></p>
+                        <p className="loading loading-spinner text-[#0f2248] loading-lg lg:-mr-[800px]  my-[200px]"></p>
                     </div>
                 ) : (
                     classes.map((subject) => (

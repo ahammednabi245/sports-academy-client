@@ -160,7 +160,7 @@ const Register = () => {
                             {error && <p className="text-red-600">{error}</p>}
                         </div>
                         <div className='my-4'>
-                            <input className='btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] w-[400px]' type="submit" />
+                            <input className='btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] w-[400px]' type="submit" value="Register" />
                         </div>
                         <div className='mt-10 mb-4'>
                             <p className='text-center mt-3 mb-5'>Login with social accounts</p>
