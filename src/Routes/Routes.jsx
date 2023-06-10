@@ -9,6 +9,9 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MySelectedClasses from "../pages/Dashboard/MySelectedClasses";
 import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses";
+import Payment from "../pages/Dashboard/Payment";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
 
 
 
@@ -46,12 +49,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "selectedClasses",
-        element: <MySelectedClasses></MySelectedClasses>
+          element: <MySelectedClasses></MySelectedClasses>
       },
       {
         path: "enrolledClasses",
         element: <MyEnrolledClasses></MyEnrolledClasses>
       },
+      {
+      path: "payment/:id",
+        element: <Payment></Payment>,
+        // loader: ({ params }) => fetch(`http://localhost:5000/selectedCourse/${params.id}`)
+      }
     ]
 
   }

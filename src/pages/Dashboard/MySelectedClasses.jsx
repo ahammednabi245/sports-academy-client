@@ -1,11 +1,14 @@
 import React from 'react';
 import useSelectedClasses from '../../hooks/useSelectedClasses';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const MySelectedClasses = () => {
     const [selected, refetch, loading] = useSelectedClasses();
 
-    const handleDelete = course => {
+    
+
+    const handleDelete = (course) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You wanted to delete this course!",
@@ -76,10 +79,13 @@ const MySelectedClasses = () => {
                                             </button>
                                         </td>
                                         <td>
-                                            <button
-                                                className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]">
-                                                Pay
-                                            </button>
+
+                                            <Link to={`/dashboard/payment/${course._id}`}>
+                                                <button
+                                                    className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]">
+                                                    Pay
+                                                </button>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}
