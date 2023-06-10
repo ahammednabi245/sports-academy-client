@@ -21,9 +21,11 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                             {/* Sidebar content here */}
-                            <li><Link to="/dashboard/selectedClasses"><button className='my-3 btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Selected Classes</button></Link></li>
+                            <li><Link to="/dashboard/selectedClasses"><button className='my-3 btn w-full bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Selected Classes</button></Link></li>
 
-                            <li><Link to="/dashboard/enrolledClasses"><button className='my-3 btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Enrolled Classes</button></Link></li>
+                            <li><Link to="/dashboard/enrolledClasses"><button className='my-3 btn w-full bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Enrolled Classes</button></Link></li>
+                            
+                            <li><Link to="/dashboard/paymentHistory"><button className='my-3 btn w-full bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Payment History</button></Link></li>
 
 
                         </ul>

@@ -87,16 +87,19 @@ const CheckoutForm = ({ course }) => {
 
             const payment = {
                 email: user?.email,
+                studentName: user?.displayName,
+                studentPicture: user?.photoURL,
                 transactionId: paymentIntent.id,
                 price,
-                date: new Date(),
+                date: new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }),
                 quantity: course.length,
                 name,
                 classPicture,
                 numberOfStudents,
                 instructorName,
                 availableSeats,
-                _id: course._id 
+                _id: course._id,
+                classId:  course.classId
             };
 
             axiosSecure.post('/enrolled', payment)
@@ -104,6 +107,16 @@ const CheckoutForm = ({ course }) => {
                     console.log(res.data);
 
                     if (res.data.insertResult.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "This Course Added to Your Selected Courses",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
+                    if (res.data.insertResult.modifiedCount > 0) {
                         refetch();
                         Swal.fire({
                             position: "center",
@@ -139,7 +152,7 @@ const CheckoutForm = ({ course }) => {
                         },
                     }}
                 />
-                <button className="btn btn-primary btn-sm mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>

@@ -11,6 +11,7 @@ import MySelectedClasses from "../pages/Dashboard/MySelectedClasses";
 import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses";
 import Payment from "../pages/Dashboard/Payment";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 
 
 
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
       {
       path: "payment/:id",
         element: <Payment></Payment>,
-        // loader: ({ params }) => fetch(`http://localhost:5000/selectedCourse/${params.id}`)
+        
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>
       }
     ]
 
