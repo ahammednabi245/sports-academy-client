@@ -4,15 +4,24 @@ import './CheckoutForm.css'
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useSelectedClasses from "../../hooks/useSelectedClasses";
 
 const CheckoutForm = ({ course }) => {
-    const { price } = course;
+    const { refetch } = useSelectedClasses();
+
+    const { price, name,
+        classPicture,
+        numberOfStudents,
+        instructorName,
+        availableSeats,
+    } = course;
 
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
-    const [cardError, setCardError] = useState('');
+    const [classesError, setClassesError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
@@ -29,7 +38,7 @@ const CheckoutForm = ({ course }) => {
         }
     }, [price, axiosSecure]);
 
-    const handleSubmit = async (event) => {
+    const handlePay = async (event) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -47,11 +56,11 @@ const CheckoutForm = ({ course }) => {
         });
 
         if (error) {
-            setCardError(error.message);
+            setClassesError(error.message);
             return;
         }
 
-        setCardError('');
+        setClassesError('');
         setProcessing(true);
 
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
@@ -82,28 +91,38 @@ const CheckoutForm = ({ course }) => {
                 price,
                 date: new Date(),
                 quantity: course.length,
-                // courseItems: course.map(item => item._id),
-                // menuItems: course.map(item => item.menuItemId),
-                status: 'service pending',
-                // itemNames: course.map(item => item.name)
+                name,
+                classPicture,
+                numberOfStudents,
+                instructorName,
+                availableSeats,
+                _id: course._id 
             };
 
             axiosSecure.post('/enrolled', payment)
                 .then(res => {
                     console.log(res.data);
-                    if (res.data.insertResult.insertedId) {
-                        // Display confirmation message
+
+                    if (res.data.insertResult.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "This Course Added to Your Selected Courses",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
                     }
                 })
                 .catch(error => {
-                    console.log('Error:', error);
+                    console.log('Hello Error:', error);
                 });
         }
     };
 
     return (
         <>
-            <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+            <form className="w-2/3 m-8" onSubmit={handlePay}>
                 <CardElement
                     options={{
                         style: {
@@ -124,7 +143,7 @@ const CheckoutForm = ({ course }) => {
                     Pay
                 </button>
             </form>
-            {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
+            {classesError && <p className="text-red-600 ml-8">{classesError}</p>}
             {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
         </>
     );
