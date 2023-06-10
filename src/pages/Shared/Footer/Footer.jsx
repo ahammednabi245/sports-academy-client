@@ -55,7 +55,7 @@ const Footer = () => {
                 </div>
                 <div>
                     <span className="footer-title">For Update Information</span>
-                    <div className="form-control w-80">
+                    <div className="form-control lg:w-80">
                         <label className="label">
                             <span className="label-text">Enter your email address</span>
                         </label>

@@ -12,6 +12,8 @@ import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses";
 import Payment from "../pages/Dashboard/Payment";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import AddClass from "../pages/Dashboard/AddClass";
 
 
 
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -47,6 +50,7 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "selectedClasses",
@@ -64,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "paymentHistory",
         element: <PaymentHistory></PaymentHistory>
+      },
+      {
+        path: "addClass",
+        element: <AddClass></AddClass>
       }
     ]
 

@@ -66,7 +66,7 @@ const Classes = () => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3  w-full my-16">
                 {loading ? (
                     <div className="flex justify-center items-center">
                         <p className="loading loading-spinner text-[#0f2248] loading-lg lg:-mr-[800px]  my-[200px]"></p>
@@ -74,12 +74,12 @@ const Classes = () => {
                 ) : (
                     classes.map((subject) => (
                         <div key={subject._id}>
-                            <div className={`card card-compact w-96 shadow-xl ${subject.availableSeats <= 0 ? "bg-red-500" : "bg-base-100"}`}>
+                            <div className={`card card-compact w-96 my-4  shadow-xl ${subject.availableSeats <= 0 ? "bg-red-500" : "bg-base-100"}`}>
                            
                                 <figure className="p-3">
-                                    <img className='w-[100%] h-[200px] rounded-md ' src={subject.classPicture} alt="" />
+                                    <img className='w-[90%] h-[200px] rounded-md ' src={subject.classPicture} alt="" />
                                 </figure>
-                                <div className="card-body mx-8 my-3">
+                                <div className="card-body mx-4 my-3">
                                     <h2 className="card-title ">{subject.name}</h2>
                                     <p className="text-[16px]"> <span className="font-semibold">Instructor Name:</span> {subject.instructorName}</p>
                                     <p className="text-[16px]"> <span className="font-semibold">Available seats:</span> {subject.availableSeats}</p>

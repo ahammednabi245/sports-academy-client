@@ -5,14 +5,14 @@ import Footer from '../Shared/Footer/Footer';
 
 const Dashboard = () => {
     return (
-        <div className='px-10 bg-white'>
+        <div className='px-10  bg-white'>
             <div>
                 <NavBar></NavBar>
             </div>
             <div>
                 <div className="drawer lg:drawer-open">
                     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                    <div className="drawer-content">
+                    <div className="drawer-content my-3">
                         {/* Page content here */}
                         <label htmlFor="my-drawer" className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] drawer-button lg:hidden">Open drawer</label>
                         <Outlet></Outlet>
@@ -27,6 +27,7 @@ const Dashboard = () => {
                             
                             <li><Link to="/dashboard/paymentHistory"><button className='my-3 btn w-full bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Payment History</button></Link></li>
 
+                            <li><Link to="/dashboard/addClass"><button className='my-3 btn w-full bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>Add a class</button></Link></li>
 
                         </ul>
                     </div>

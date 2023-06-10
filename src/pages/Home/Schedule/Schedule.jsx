@@ -31,7 +31,7 @@ const Schedule = () => {
                     <div className=' bg-[#0f2248] text-white p-2 rounded'><h1>NEWS</h1></div>
                     <div>
                         <Marquee className='text-[#0f2248] text-lg font-medium' speed={100}>
-                            New year registrations open, contact us and renew your card !
+                        Summer season registrations open, contact us and renew your card !
                         </Marquee>
                     </div>
                 </div>

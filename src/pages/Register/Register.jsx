@@ -97,17 +97,17 @@ const Register = () => {
                             <p className='text-center mt-3 mb-5'>Please Register Your Account</p>
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Name</label> <br />
+                            <label className='text-lg '>Name</label> 
                             <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.Name ? 'border-red-500' : ''}`} {...register("Name", { required: true })} placeholder="Name" />
                             {errors.Name && <p className="text-red-600">Name is required</p>}
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Email</label> <br />
+                            <label className='text-lg '>Email</label> 
                             <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.email ? 'border-red-500' : ''}`} {...register("email", { required: true })} placeholder="Email" />
                             {errors.email && <p className="text-red-600">Email is required</p>}
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Password</label> <br />
+                            <label className='text-lg '>Password</label> 
                             <div style={{ position: 'relative' }}>
                                 <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.password ? 'border-red-500' : ''}`} type={show ? 'text' : 'password'} {...register("password", {
                                     required: true, 
@@ -133,7 +133,7 @@ const Register = () => {
                         </div>
 
                         <div className='my-4'>
-                            <label className='text-lg '>Confirm Password</label> <br />
+                            <label className='text-lg '>Confirm Password</label> 
                             <div style={{ position: 'relative' }}>
                                 <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.confirmPassword ? 'border-red-500' : ''}`} type={confirmShow ? 'text' : 'password'} {...register("confirmPassword", { required: true })} placeholder="Confirm Password" />
                                 <p
@@ -152,7 +152,7 @@ const Register = () => {
                             {errors.confirmPassword && <p className="text-red-600">Confirm Password is required</p>}
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Photo URL</label> <br />
+                            <label className='text-lg '>Photo URL</label> 
                             <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.photo ? 'border-red-500' : ''}`} type="text" {...register("photo", { required: true })} placeholder="Photo URL" />
                             {errors.photo && <p className="text-red-600">Photo URL is required</p>}
                         </div>

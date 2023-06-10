@@ -5,15 +5,16 @@ const Instructors = () => {
     const [instructors, loading] = useInstructors();
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3  w-full my-16">
             {loading ? (
                 <div className="flex justify-center items-center ">
-                    <p className="loading loading-spinner text-[#0f2248] loading-lg lg:-mr-[800px] my-[200px]"></p>
+                    <p className="loading loading-spinner text-[#0f2248] loading-lg  
+                    lg:ml-[600px] ml-3 my-[200px]"></p>
                 </div>
             ) : (
                 instructors.map((instructor) => (
                     <div key={instructor._id}>
-                        <div className="card card-compact w-96 bg-base-100 shadow-xl">
+                        <div className="card card-compact my-4 w-96 bg-base-100 shadow">
                             <figure>
                                 <img className='w-[300px] h-[200px] rounded-md' src={instructor.instructorsImage} alt={instructor.instructorName} />
                             </figure>

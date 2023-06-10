@@ -82,13 +82,13 @@ const Login = () => {
                             <p className='text-center mt-3 mb-5'>Log In To Access Your Account</p>
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Email</label> <br />
+                            <label className='text-lg '>Email</label> 
                             <input className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.email ? 'border-red-500' : ''}`} {...register("email", { required: true })} placeholder="Email" />
                             {errors.email && <p className="text-red-600">Email is required</p>}
 
                         </div>
                         <div className='my-4'>
-                            <label className='text-lg '>Password</label> <br />
+                            <label className='text-lg '>Password</label> 
                             <div style={{ position: 'relative' }}>
                                 <input
                                     className={`border p-5 h-[50px] w-[400px] rounded-md ${errors.password ? 'border-red-500' : ''
