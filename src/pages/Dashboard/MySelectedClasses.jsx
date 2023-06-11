@@ -11,14 +11,19 @@ const MySelectedClasses = () => {
     const handleDelete = (course) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You wanted to delete this course!",
-            icon: "warning",
+            text: 'You wanted to delete this course!',
+            icon: 'warning',
             showCancelButton: true,
-            iconColor: "#d33",
-            confirmButtonColor: "#0f2248",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Delete",
-        }).then((result) => {
+            iconColor: '#d33',
+            confirmButtonColor: '#0f2248',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete',
+            customClass: {
+              confirmButton: 'btn btn-wide bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] my-2',
+              cancelButton: 'btn btn-wide bg-[#d33] border-none text-white hover:bg-[#b02a24] my-2'
+            }
+          })
+          .then((result) => {
             if (result.isConfirmed) {
                 fetch(`http://localhost:5000/selectedCourse/${course._id}`, {
                     method: 'DELETE'

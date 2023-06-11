@@ -55,6 +55,10 @@ const Classes = () => {
                 confirmButtonColor: "#0f2248",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Login now!",
+                customClass: {
+                    confirmButton: 'btn btn-wide bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] my-2',
+                    cancelButton: 'btn btn-wide bg-[#d33] border-none text-white hover:bg-[#b02a24] my-2'
+                  }
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate("/login", { state: { from: location } });
@@ -66,7 +70,7 @@ const Classes = () => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 lg:grid-cols-3  w-full my-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
                 {loading ? (
                     <div className="flex justify-center items-center">
                         <p className="loading loading-spinner text-[#0f2248] loading-lg lg:-mr-[800px]  my-[200px]"></p>
@@ -74,9 +78,9 @@ const Classes = () => {
                 ) : (
                     classes.map((subject) => (
                         <div key={subject._id}>
-                            <div className={`card card-compact w-96 my-4  shadow-xl ${subject.availableSeats <= 0 ? "bg-red-500" : "bg-base-100"}`}>
+                            <div className={`card  w-[400px] my-4  shadow-xl ${subject.availableSeats <= 0 ? "bg-red-500" : "bg-base-100"}`}>
                            
-                                <figure className="p-3">
+                                <figure className="px-8 pt-10">
                                     <img className='w-[90%] h-[200px] rounded-md ' src={subject.classPicture} alt="" />
                                 </figure>
                                 <div className="card-body mx-4 my-3">

@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "selectedClasses",
-          element: <MySelectedClasses></MySelectedClasses>
+          element: <PrivateRoute><MySelectedClasses></MySelectedClasses></PrivateRoute>
       },
       {
         path: "enrolledClasses",
