@@ -27,9 +27,12 @@ const Dashboard = () => {
                             
                             <li><Link to="/dashboard/paymentHistory"><button className='my-3 btn btn-wide bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]'>My Payment History</button></Link></li>
 
-                            <li><Link to="/dashboard/addClass"><button className='my-3 btn bg-[#0f2248] btn-wide border-none text-white hover:bg-[#0b1b3c]'>Add a class</button></Link></li>
+                            {/* <li><Link to="/dashboard/addClass"><button className='my-3 btn bg-[#0f2248] btn-wide border-none text-white hover:bg-[#0b1b3c]'>Add a class</button></Link></li> */}
 
                             <li><Link to="/dashboard/myClass"><button className='my-3 btn bg-[#0f2248] btn-wide border-none text-white hover:bg-[#0b1b3c]'>My  class</button></Link></li>
+
+                            <li><Link to="/dashboard/manageClasses"><button className='my-3 btn bg-[#0f2248] btn-wide border-none text-white hover:bg-[#0b1b3c]'>Manage Classes</button></Link></li>
+
 
                         </ul>
                     </div>

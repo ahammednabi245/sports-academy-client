@@ -16,6 +16,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AddClass from "../pages/Dashboard/AddClass";
 import MyClass from "../pages/Dashboard/MyClass";
 import Update from "../pages/Dashboard/Update";
+import Feedback from "../pages/Dashboard/Feedback";
+import ManageClasses from "../pages/Dashboard/ManageClasses";
 
 
 
@@ -82,8 +84,15 @@ const router = createBrowserRouter([
       {
         path: "update/:id",
         element: <Update></Update>,
-        
-
+      
+      },
+      {
+        path: "feedback/:id",
+        element: <Feedback></Feedback>
+      },
+      {
+        path: "manageClasses",
+        element: <ManageClasses></ManageClasses>
       }
     ]
 
