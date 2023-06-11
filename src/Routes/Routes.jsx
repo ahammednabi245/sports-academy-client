@@ -14,6 +14,8 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AddClass from "../pages/Dashboard/AddClass";
+import MyClass from "../pages/Dashboard/MyClass";
+import Update from "../pages/Dashboard/Update";
 
 
 
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "selectedClasses",
-          element: <PrivateRoute><MySelectedClasses></MySelectedClasses></PrivateRoute>
+          element: <MySelectedClasses></MySelectedClasses>
       },
       {
         path: "enrolledClasses",
@@ -72,6 +74,16 @@ const router = createBrowserRouter([
       {
         path: "addClass",
         element: <AddClass></AddClass>
+      },
+      {
+        path: "myClass",
+        element: <MyClass></MyClass>
+      },
+      {
+        path: "update/:id",
+        element: <Update></Update>,
+        
+
       }
     ]
 

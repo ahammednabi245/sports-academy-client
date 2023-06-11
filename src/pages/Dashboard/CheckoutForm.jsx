@@ -1,21 +1,18 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import './CheckoutForm.css'
+import './CheckoutForm.css';
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../hooks/useSelectedClasses";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const CheckoutForm = ({ course }) => {
     const { refetch } = useSelectedClasses();
 
-    const { price, name,
-        classPicture,
-        numberOfStudents,
-        instructorName,
-        availableSeats,
-    } = course;
+    const { price, name, classPicture, numberOfStudents, instructorName, availableSeats } = course;
 
     const stripe = useStripe();
     const elements = useElements();
@@ -25,17 +22,21 @@ const CheckoutForm = ({ course }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
+    const { id } = useParams();
 
     useEffect(() => {
-        if (price > 0) {
-            axiosSecure.post('/create-payment-intent', { price })
-                .then(res => {
-                    setClientSecret(res.data.clientSecret);
-                })
-                .catch(error => {
+        const createPaymentIntent = async () => {
+            if (price > 0) {
+                try {
+                    const response = await axiosSecure.post('/create-payment-intent', { price });
+                    setClientSecret(response.data.clientSecret);
+                } catch (error) {
                     console.log('Error:', error);
-                });
-        }
+                }
+            }
+        };
+
+        createPaymentIntent();
     }, [price, axiosSecure]);
 
     const handlePay = async (event) => {
@@ -99,14 +100,13 @@ const CheckoutForm = ({ course }) => {
                 instructorName,
                 availableSeats,
                 _id: course._id,
-                classId:  course.classId
             };
 
-            axiosSecure.post('/enrolled', payment)
+            axiosSecure.post(`/enrolled/${id}`, payment)
                 .then(res => {
                     console.log(res.data);
 
-                    if (res.data.insertResult.deletedCount > 0) {
+                    if (res.data.insertResult.insertedCount > 0) {
                         refetch();
                         Swal.fire({
                             position: "center",
@@ -115,20 +115,21 @@ const CheckoutForm = ({ course }) => {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                    }
-                    if (res.data.insertResult.modifiedCount > 0) {
-                        refetch();
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "This Course Added to Your Selected Courses",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
+
+                        // Update availableSeats value
+                        axios.put(`/enrolled/${id}`, { _id: id, availableSeats: availableSeats - 1 })
+                            .then(response => {
+                                console.log(response.data);
+                                // Handle successful update
+                            })
+                            .catch(error => {
+                                console.log('Error:', error);
+                                // Handle error
+                            });
                     }
                 })
                 .catch(error => {
-                    console.log('Hello Error:', error);
+                    console.log('Error:', error);
                 });
         }
     };
