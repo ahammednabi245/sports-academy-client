@@ -7,7 +7,7 @@ const Feedback = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/classes/${id}`)
+        fetch(`https://sports-academies-server-nu.vercel.app/classes/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

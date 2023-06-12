@@ -6,7 +6,7 @@ const useInstructors = () => {
   const { data: popularInstructors = [], isLoading: loading, refetch } = useQuery({
     queryKey: ["popularInstructors"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/popularInstructors");
+      const res = await fetch("https://sports-academies-server-nu.vercel.app/popularInstructors");
       return res.json();
     },
   });

@@ -26,7 +26,7 @@ const Classes = () => {
                 userName: user.displayName,
             };
 
-            fetch("http://localhost:5000/selectedCourse", {
+            fetch("https://sports-academies-server-nu.vercel.app/selectedCourse", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",

@@ -25,7 +25,7 @@ const MySelectedClasses = () => {
           })
           .then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/selectedCourse/${course._id}`, {
+                fetch(`https://sports-academies-server-nu.vercel.app/selectedCourse/${course._id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

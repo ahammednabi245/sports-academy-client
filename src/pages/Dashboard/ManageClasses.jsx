@@ -19,7 +19,7 @@ const ManageClasses = () => {
 
     const handleApprove = async (subject) => {
         try {
-            await axiosSecure.put(`/updateMyClass/${subject._id}`, {
+            await axiosSecure.put(`/updateClass/${subject._id}`, {
                 ...subject,
                 status: "Approved",
             });
@@ -33,7 +33,7 @@ const ManageClasses = () => {
 
     const handleDeny = async (subject) => {
         try {
-            await axiosSecure.put(`/updateMyClass/${subject._id}`, {
+            await axiosSecure.put(`/updateClass/${subject._id}`, {
                 ...subject,
                 status: "Denied",
             });

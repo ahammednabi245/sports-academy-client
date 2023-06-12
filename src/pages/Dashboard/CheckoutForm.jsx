@@ -98,7 +98,7 @@ const CheckoutForm = ({ course }) => {
                 classPicture,
                 numberOfStudents,
                 instructorName,
-                availableSeats,
+                availableSeats: availableSeats-1,
                 _id: course._id,
             };
 
@@ -116,15 +116,15 @@ const CheckoutForm = ({ course }) => {
                             timer: 1500,
                         });
 
-                        // Update availableSeats value
+                        
                         axios.put(`/enrolled/${id}`, { _id: id, availableSeats: availableSeats - 1 })
                             .then(response => {
                                 console.log(response.data);
-                                // Handle successful update
+                                
                             })
                             .catch(error => {
                                 console.log('Error:', error);
-                                // Handle error
+                               
                             });
                     }
                 })
@@ -136,15 +136,15 @@ const CheckoutForm = ({ course }) => {
 
     return (
         <>
-            <form className="w-2/3 m-8" onSubmit={handlePay}>
+            <form className="flex flex-col justify-center " onSubmit={handlePay}>
                 <CardElement
                     options={{
                         style: {
                             base: {
-                                fontSize: '16px',
-                                color: '#424770',
+                                fontSize: '20px',
+                                color: '#0f2248',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#0f2248',
                                 },
                             },
                             invalid: {
@@ -153,12 +153,12 @@ const CheckoutForm = ({ course }) => {
                         },
                     }}
                 />
-                <button className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn btn-[20px] w-28 bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c] mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>
-            {classesError && <p className="text-red-600 ml-8">{classesError}</p>}
-            {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
+            {classesError && <p className="text-red-600 -mt-8 ml-12">{classesError}</p>}
+            {transactionId && <p className="text-[#0f2248] -mt-8 ml-12"> Your Transaction complete </p>}
         </>
     );
 };

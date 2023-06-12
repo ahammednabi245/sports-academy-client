@@ -40,8 +40,8 @@ const Register = () => {
                 })
                     .then(() => {
 
-                        const saveUser = { name: data.displayName, email: data.email }
-                        fetch('http://localhost:5000/users', {
+                        const saveUser = { name:  createdUser.displayName, email: data.email }
+                        fetch('https://sports-academies-server-nu.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -100,7 +100,7 @@ const Register = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
                 const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
-                fetch('http://localhost:5000/users', {
+                fetch('https://sports-academies-server-nu.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

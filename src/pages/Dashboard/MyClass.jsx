@@ -14,7 +14,7 @@ const MyClass = () => {
     useEffect(() => {
         const fetchMyClass = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/myClass/${user?.email}`);
+                const response = await fetch(`https://sports-academies-server-nu.vercel.app/myClass/${user?.email}`);
                 const data = await response.json();
                 setMyClass(data);
             } catch (error) {

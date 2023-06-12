@@ -52,7 +52,7 @@ const NavBar = () => {
                 {user ? (
                         user.photoURL ? (
                             <img
-                                className='rounded-full mr-4'
+                                className='avatar rounded-full mr-4'
                                 style={{ height: '55px' }}
                                 src={user.photoURL}
                                 alt={user.displayName}
