@@ -61,8 +61,13 @@ const MyClass = () => {
                                     <td className="text-[16px]">{myClass.status}</td>
                                     <td>
                                         <Link to={`/dashboard/feedback/${myClass._id}`}>
-                                            <button className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]" >Feedback</button>
-                                            
+                                            <button
+                                                className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]"
+                                                disabled={myClass.status === 'pending' || myClass.status === 'Approved'}
+                                            >
+                                                Feedback
+                                            </button>
+
                                         </Link>
                                     </td>
                                     <td>

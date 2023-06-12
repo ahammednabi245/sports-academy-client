@@ -18,6 +18,9 @@ import MyClass from "../pages/Dashboard/MyClass";
 import Update from "../pages/Dashboard/Update";
 import Feedback from "../pages/Dashboard/Feedback";
 import ManageClasses from "../pages/Dashboard/ManageClasses";
+import ManageUsers from "../pages/Dashboard/manageUsers";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
 
@@ -75,11 +78,11 @@ const router = createBrowserRouter([
       },
       {
         path: "addClass",
-        element: <AddClass></AddClass>
+        element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
       },
       {
         path: "myClass",
-        element: <MyClass></MyClass>
+        element: <InstructorRoute><MyClass></MyClass></InstructorRoute>
       },
       {
         path: "update/:id",
@@ -92,7 +95,12 @@ const router = createBrowserRouter([
       },
       {
         path: "manageClasses",
-        element: <ManageClasses></ManageClasses>
+        element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
+      },
+      {
+       path: "manageUsers",
+       element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        
       }
     ]
 
