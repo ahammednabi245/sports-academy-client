@@ -1,5 +1,7 @@
 #### Sports Academy 
 
+
+
 <ul className="list-disc">
   <li> Initially when a user without Login enters this web site he will see a navigation bar from where he can go to  Home, Instructor, Classes and Login pages. When a user Login in then user see Dashboard, her profile picture and when he hover her picture he will see her name. </li>
 
@@ -27,7 +29,26 @@
   
 </ul>
 
-
-
-
 ####  View live site link   [Sports Academy ](https://sports-academy-2e6e5.web.app/)
+
+##  Used Technology  :  
+#   1. Mongodb 
+#   2. Express.js
+#   3. React 
+#   4. Node JS
+#   5. Firebase
+#   6. Vercel
+
+##  Used Packages  :  
+#   1. Framer-motion 
+#   2. React-awesome-reveal 
+#   3. AOS 
+#   4. Swiper slider
+#   5. Marque
+#   6. Moment
+#   7. Sweet alert
+#   8. Toastify
+
+
+
+

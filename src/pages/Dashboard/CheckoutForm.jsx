@@ -98,7 +98,7 @@ const CheckoutForm = ({ course }) => {
                 classPicture,
                 numberOfStudents,
                 instructorName,
-                availableSeats: availableSeats-1,
+                availableSeats,
                 _id: course._id,
             };
 
@@ -111,7 +111,7 @@ const CheckoutForm = ({ course }) => {
                         Swal.fire({
                             position: "center",
                             icon: "success",
-                            title: "This Course Added to Your Selected Courses",
+                            title: "This Course Added ",
                             showConfirmButton: false,
                             timer: 1500,
                         });

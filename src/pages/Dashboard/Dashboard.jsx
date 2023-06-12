@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import NavBar from '../Shared/NavBar/NavBar';
+
 import Footer from '../Shared/Footer/Footer';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
+import NavBar from '../Shared/NavBar/NavBar';
+
 
 const Dashboard = () => {
 

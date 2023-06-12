@@ -22,7 +22,9 @@ const Payment = () => {
     }, [id]);
 
     if (!course) {
-        return <div>Loading...</div>;
+        return <div className="flex justify-center items-center">
+            <p className="loading loading-spinner text-[#0f2248] loading-lg  my-[200px]"></p>
+        </div>;
     }
 
     return (
@@ -38,22 +40,22 @@ const Payment = () => {
                         </tr>
                     </thead>
                     <tbody>
-                       
-                            <tr className="text-center text-lg">
-                                <td>
-                                    <img
-                                        className="w-[100%] p-4 rounded-[30px]"
-                                        src={course.classPicture}
-                                        alt=""
-                                    />
-                                </td>
-                                <td className="text-[16px]">{course.name}</td>
-                                <td className="text-[16px]">{course.instructorName}</td>
-                                <td className="text-[16px]">{course.price}</td>
-                               
 
-                            </tr>
-                 
+                        <tr className="text-center text-lg">
+                            <td>
+                                <img
+                                    className="w-[100%] p-4 rounded-[30px]"
+                                    src={course.classPicture}
+                                    alt=""
+                                />
+                            </td>
+                            <td className="text-[16px]">{course.name}</td>
+                            <td className="text-[16px]">{course.instructorName}</td>
+                            <td className="text-[16px]">{course.price}</td>
+
+
+                        </tr>
+
                     </tbody>
                 </table>
             </div>

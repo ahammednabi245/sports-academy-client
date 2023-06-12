@@ -67,6 +67,8 @@ const Classes = () => {
         }
     };
 
+    const filteredClasses = classes.filter(subject => subject.status !== "pending" && subject.status !== "Denied");
+
 
     return (
         <div>
@@ -77,7 +79,7 @@ const Classes = () => {
                         <p className="loading loading-spinner text-[#0f2248] loading-lg lg:-mr-[800px]  my-[200px]"></p>
                     </div>
                 ) : (
-                    classes.map((subject) => (
+                    filteredClasses.map((subject) => (
                         <div key={subject._id}>
                             <div className={`card  w-[400px] my-4  shadow-xl ${subject.availableSeats <= 0 ? "bg-red-500" : "bg-base-100"}`}>
                            

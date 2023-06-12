@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
-    const { signInWithGoogle, signInWithTwitter, createUser } = useContext(AuthContext);
+    const { signInWithGoogle,  createUser } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [show, setShow] = useState(false);
     const [confirmShow, setConfirmShow] = useState(false);
@@ -33,14 +33,14 @@ const Register = () => {
             .then((result) => {
                 const createdUser = result.user;
 
-                // Set displayName and photoURL
+               
                 updateProfile(createdUser, {
                     displayName: Name,
                     photoURL: photo
                 })
                     .then(() => {
 
-                        const saveUser = { name:  createdUser.displayName, email: data.email }
+                        const saveUser = { name:  createdUser.displayName, email: data.email, photo: createdUser.photoURL, }
                         fetch('https://sports-academies-server-nu.vercel.app/users', {
                             method: 'POST',
                             headers: {
@@ -53,9 +53,10 @@ const Register = () => {
                                 if (data.insertedId) {
                                     Swal.fire({
                                         title: 'Success!',
-                                        text: 'Your account has been created successfully',
+                                        text: 'Your Register Successfully Done',
                                         icon: 'success',
-                                        confirmButtonText: 'OK',
+                                        showConfirmButton: false,
+                                        timer: 1500
                                     });
                                     navigate(from, { replace: true });
 
@@ -78,18 +79,7 @@ const Register = () => {
             });
     };
 
-    // Twitter Sign in
-
-    const handleTwitterSignIn = () => {
-        signInWithTwitter()
-            .then(() => {
-                console.log('User signed in with Google');
-                navigate(from, { replace: true });
-            })
-            .catch((error) => {
-                console.log('Error signing in with Google:', error);
-            });
-    };
+    
 
     // Google Sign in
 
@@ -99,7 +89,7 @@ const Register = () => {
                 console.log('User signed in with Google');
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
-                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
+                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo: loggedInUser.photoURL }
                 fetch('https://sports-academies-server-nu.vercel.app/users', {
                     method: 'POST',
                     headers: {
@@ -198,13 +188,7 @@ const Register = () => {
                         <div className='mt-10 mb-4'>
                             <p className='text-center mt-3 mb-5'>Login with social accounts</p>
                             <div className='flex flex-col gap-6'>
-                                <div
-                                    onClick={handleTwitterSignIn}
-                                    className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'
-                                >
-                                    <FaTwitter className="text-[#1da1f2] text-3xl"></FaTwitter>
-                                    <p>Twitter</p>
-                                </div>
+                                
                                 <div
                                     onClick={handleGoogleSignIn}
                                     className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'

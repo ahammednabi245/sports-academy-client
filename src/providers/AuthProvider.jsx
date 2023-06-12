@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {   GoogleAuthProvider,  TwitterAuthProvider,  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {   GoogleAuthProvider,    createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../firebase/firebase.config';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
 
-const twitterProvider = new TwitterAuthProvider();
+
 
 
 
@@ -46,44 +46,35 @@ const AuthProvider = ({ children }) => {
     }
     
 
-    const signInWithTwitter = () => {
-        setLoading(true);
-        return signInWithPopup(auth, twitterProvider);
-    }
-    
    
   
   
    
+
+  
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
-            console.log('log in user inside the auth state observer', loggedUser)
-            setUser(loggedUser);
-
-
-            if(loggedUser){
-                axios.post('https://sports-academies-server-nu.vercel.app/jwt', {email: loggedUser.email})
-                .then(data =>{
-                    // console.log(data.data.token)
-                    localStorage.setItem('access-token', data.data.token)
-                    setLoading(false);
-                })
-            }
-            else{
-                console.log('nothing');
-                localStorage.removeItem('access-token')
-            }
-
-
-
-       
+          setUser(loggedUser)
+          console.log('current user', loggedUser)
+          if (loggedUser) {
+            axios
+              .post('https://sports-academies-server-nu.vercel.app/jwt', {email: loggedUser.email})
+              .then(data => {
+                localStorage.setItem('access-token', data.data.token)
+                setLoading(false)
+              })
+          } else {
+            localStorage.removeItem('access-token')
+          }
+          setLoading(false)
         })
-
         return () => {
-            unsubscribe();
+          return unsubscribe()
         }
-    }, [])
+      }, [])
+
 
     const authInfo = {
         user,
@@ -92,7 +83,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         signInWithGoogle,
-        signInWithTwitter
+        
        
         
     }

@@ -121,7 +121,7 @@ const ManageClasses = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        {/* The button to open modal */}
+                                        
                                         <label
                                             htmlFor={`my_modal_${subject._id}`}
                                             className="btn bg-[#0f2248] border-none text-white hover:bg-[#0b1b3c]"

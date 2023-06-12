@@ -7,7 +7,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-    const { signInWithGoogle, signInWithTwitter, signIn } = useContext(AuthContext);
+    const { signInWithGoogle,  signIn } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
@@ -44,18 +44,7 @@ const Login = () => {
             });
     };
 
-    // Twitter Sign in
-
-    const handleTwitterSignIn = () => {
-        signInWithTwitter()
-            .then(() => {
-                console.log('User signed in with Google');
-                navigate(from, { replace: true });
-            })
-            .catch((error) => {
-                console.log('Error signing in with Google:', error);
-            });
-    };
+   
 
     // Google Sign in
 
@@ -65,7 +54,7 @@ const Login = () => {
                 console.log('User signed in with Google');
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
-                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
+                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo: loggedInUser.photoURL }
                 fetch('https://sports-academies-server-nu.vercel.app/users', {
                     method: 'POST',
                     headers: {
@@ -136,13 +125,7 @@ const Login = () => {
                         <div className='mt-10 mb-4'>
                             <p className='text-center mt-3 mb-5'>Login with social accounts</p>
                             <div className='flex flex-col gap-6'>
-                                <div
-                                    onClick={handleTwitterSignIn}
-                                    className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'
-                                >
-                                    <FaTwitter className="text-[#1da1f2] text-3xl"></FaTwitter>
-                                    <p>Twitter</p>
-                                </div>
+                                
                                 <div
                                     onClick={handleGoogleSignIn}
                                     className='btn btn-outline w-[400px] hover:bg-[#0b1b3c] rounded-md cursor-pointer'

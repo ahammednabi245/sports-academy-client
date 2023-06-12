@@ -2,7 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import { FaTrashAlt, FaUserShield } from 'react-icons/fa';
+
 
 const ManageUsers = () => {
 
@@ -22,7 +22,7 @@ const ManageUsers = () => {
                 if (data.modifiedCount) {
                     refetch();
                     Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: `${user.name} is an Admin Now!`,
                         showConfirmButton: false,
@@ -43,7 +43,7 @@ const ManageUsers = () => {
                 if (data.modifiedCount) {
                     refetch();
                     Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: `${user.name} is an Instructor Now!`,
                         showConfirmButton: false,
